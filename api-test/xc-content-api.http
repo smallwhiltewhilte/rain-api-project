@@ -1,14 +1,5 @@
-### 课程查询接口
-PUT /materialSort
-
 ###
-GET http://localhost:8081/ebank/books
-
-###
-GET http://localhost/user/{{id}}
-
-### 新增课程接口
-POST http://localhost:63040/content/course/list?pageNo=1&pageSize=10
+POST {{content_host}}/content/course/list?pageNo=1&pageSize=10
 Content-Type:application/json
 
 {
@@ -16,3 +7,43 @@ Content-Type:application/json
   "courseName": "java",
   "publishStatus": "203001"
 }
+
+<> 2023-01-17T142919.200.json
+
+###
+GET {{content_host}}/content/course-category/tree-nodes
+
+<> 2023-01-17T142923.200.json
+
+### 创建课程
+POST {{content_host}}/content/course
+Content-Type: application/json
+
+{
+  "mt": "1-1",
+  "st": "1-1-1",
+  "name": "CSS",
+  "pic": "",
+  "teachmode": "200002",
+  "users": "初级人员",
+  "tags": "",
+  "grade": "204001",
+  "description": "课程介绍",
+  "charge": "201001",
+  "price": "10",
+  "originalPrice": "10",
+  "qq": "131241",
+  "wechat": "4321433214",
+  "phone": "5345634",
+  "validDays": 365
+}
+
+<> 2023-01-17T154507.200.json
+<> 2023-01-17T154046.404.json
+<> 2023-01-17T153944.404.json
+<> 2023-01-17T153933.404.json
+<> 2023-01-17T153707.404.json
+
+### 查询课程计划
+GET {{content_host}}/content/teachplan/117/tree-nodes
+Content-Type: application/json

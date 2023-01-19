@@ -7,6 +7,8 @@ import lombok.ToString;
 /**
  * @author wangzan
  * @version 1.0
+ * @description 分页参数
+ * @date 2023/1/14
  */
 @Data
 @ToString

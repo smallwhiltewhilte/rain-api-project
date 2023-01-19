@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @author wangzan
  * @version 1.0
+ * @description 分页拦截器
+ * @date 2023/1/16
  */
 @Configuration
 @MapperScan("com.xuecheng.content.mapper")

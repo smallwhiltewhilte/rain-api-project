@@ -10,6 +10,7 @@ import com.xuecheng.content.model.po.CourseBase;
  * @author wangzan
  * @version 1.0
  */
+
 public interface CourseBaseMapper extends BaseMapper<CourseBase> {
 
 }

@@ -5,6 +5,8 @@ import lombok.Data;
 /**
  * @author wangzan
  * @version 1.0
+ * @description 查询课程参数dto
+ * @date 2023/1/16
  */
 @Data
 public class QueryCourseParamsDto {
