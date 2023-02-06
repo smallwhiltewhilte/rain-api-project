@@ -9,7 +9,6 @@ import com.xuecheng.content.model.po.CourseMarket;
  * </p>
  *
  * @author wangzan
- * @since 2023-01-17
  */
 public interface CourseMarketService extends IService<CourseMarket> {
 

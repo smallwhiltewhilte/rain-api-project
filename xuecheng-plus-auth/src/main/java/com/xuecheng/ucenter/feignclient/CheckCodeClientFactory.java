@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 /**
  * @author wangzan
  * @version 1.0
- * @description 熔断
+ * @description CheckCodeClient熔断降级处理类
  * @date 2023/1/30
  */
 @Component

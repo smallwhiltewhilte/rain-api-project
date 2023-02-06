@@ -14,7 +14,6 @@ import com.xuecheng.content.model.po.CourseBase;
  * </p>
  *
  * @author wangzan
- * @since 2023-01-16
  */
 public interface CourseBaseInfoService {
     /**

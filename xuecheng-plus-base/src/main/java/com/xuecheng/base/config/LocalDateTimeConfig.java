@@ -8,7 +8,12 @@ import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * @author wangzan
+ * @version 1.0
+ * @description 日期时间配置类
+ * @date 2023/1/18
+ */
 @Configuration
 public class LocalDateTimeConfig {
 

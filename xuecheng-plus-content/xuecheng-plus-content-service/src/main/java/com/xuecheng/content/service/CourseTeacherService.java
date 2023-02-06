@@ -12,7 +12,6 @@ import java.util.List;
  * </p>
  *
  * @author wangzan
- * @since 2023-01-17
  */
 public interface CourseTeacherService extends IService<CourseTeacher> {
     /**

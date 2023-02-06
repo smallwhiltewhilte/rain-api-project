@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * @author wangzan
  * @version 1.0
- * @description 验证用户实现类
+ * @description 验证用户service实现类
  * @date 2023/1/30
  */
 @Slf4j

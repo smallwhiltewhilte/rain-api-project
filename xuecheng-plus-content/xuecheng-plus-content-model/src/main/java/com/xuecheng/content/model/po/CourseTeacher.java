@@ -10,8 +10,8 @@ import java.time.LocalDateTime;
  * <p>
  * 课程-教师关系表
  * </p>
+ *
  * @author wangzan
- * @version 1.0
  */
 @Data
 @TableName("course_teacher")

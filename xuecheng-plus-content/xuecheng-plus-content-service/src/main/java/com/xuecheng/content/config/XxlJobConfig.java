@@ -8,9 +8,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * xxl-job config
- *
- * @author xuxueli 2017-04-28
+ * @author wangzan
+ * @version 1.0
+ * @description XxlJob配置类
+ * @date 2023/1/16
  */
 @Configuration
 public class XxlJobConfig {

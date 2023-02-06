@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * @author wangzan
  * @version 1.0
- * @description MediaServiceClient降级方法
+ * @description MediaServiceClient熔断降级处理类
  * @date 2023/1/29
  */
 @Component

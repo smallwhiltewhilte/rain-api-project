@@ -5,10 +5,11 @@ import com.xuecheng.content.model.dto.CourseCategoryTreeDto;
 import java.util.List;
 
 /**
+ * <p>
+ * 课程分类信息 服务类
+ * </p>
+ *
  * @author wangzan
- * @version 1.0
- * @description 课程分类操作相关service
- * @date 2023/1/17
  */
 public interface CourseCategoryService {
     /**

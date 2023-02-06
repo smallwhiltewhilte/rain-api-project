@@ -26,7 +26,7 @@ import java.util.UUID;
 /**
  * @author wangzan
  * @version 1.0
- * @description 微信认证
+ * @description 微信认证service实现类
  * @date 2023/1/30
  */
 @Service

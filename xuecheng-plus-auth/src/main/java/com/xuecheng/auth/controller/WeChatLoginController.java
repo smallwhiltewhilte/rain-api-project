@@ -13,7 +13,7 @@ import java.io.IOException;
 /**
  * @author wangzan
  * @version 1.0
- * @description
+ * @description 微信登录接口
  * @date 2023/1/30
  */
 @Slf4j

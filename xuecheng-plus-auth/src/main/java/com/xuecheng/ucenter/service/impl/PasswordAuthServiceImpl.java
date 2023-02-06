@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 /**
  * @author wangzan
  * @version 1.0
- * @description 账号密码认证
+ * @description 账号密码认证service实现类
  * @date 2023/1/30
  */
 @Service("password_authservice")

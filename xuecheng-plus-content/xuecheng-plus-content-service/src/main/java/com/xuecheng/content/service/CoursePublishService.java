@@ -6,10 +6,11 @@ import com.xuecheng.content.model.po.CoursePublish;
 import java.io.File;
 
 /**
+ * <p>
+ * 课程预览发布 服务类
+ * </p>
+ *
  * @author wangzan
- * @version 1.0
- * @description 课程预览发布接口
- * @date 2023/1/28
  */
 public interface CoursePublishService {
     /**
@@ -64,13 +65,26 @@ public interface CoursePublishService {
     Boolean saveCourseIndex(Long courseId);
 
     /**
+     * @param courseId 课程id
      * @return com.xuecheng.content.model.po.CoursePublish
      * @description 获取已发布课程
      * @date 2023/1/31
-     * @param    courseId    课程id
      **/
     CoursePublish getCoursePublish(Long courseId);
 
+    /**
+     * @return com.xuecheng.content.model.po.CoursePublish
+     * @description
+     * @date 2023/1/30
+     * @param    courseId
+     **/
     CoursePublish getCoursePublishCache(Long courseId);
 
+    /**
+     * @return java.lang.Boolean
+     * @description
+     * @date 2023/1/30
+     * @param    courseId
+     **/
+    Boolean saveCourseCache(Long courseId);
 }

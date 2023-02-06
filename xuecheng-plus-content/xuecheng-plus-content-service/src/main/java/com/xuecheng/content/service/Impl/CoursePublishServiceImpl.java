@@ -340,6 +340,11 @@ public class CoursePublishServiceImpl implements CoursePublishService {
         }
     }
 
+    @Override
+    public Boolean saveCourseCache(Long courseId) {
+        return null;
+    }
+
     //保存消息表
     private void saveCoursePublishMessage(Long courseId) {
         MqMessage mqMessage = mqMessageService.addMessage(MESSAGE_TYPE, String.valueOf(courseId), null, null);

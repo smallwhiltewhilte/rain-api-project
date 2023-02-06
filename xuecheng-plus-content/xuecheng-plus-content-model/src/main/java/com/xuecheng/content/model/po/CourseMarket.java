@@ -9,8 +9,8 @@ import java.io.Serializable;
  * <p>
  * 课程营销信息
  * </p>
+ *
  * @author wangzan
- * @version 1.0
  */
 @Data
 @TableName("course_market")

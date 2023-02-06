@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * <p>
- * 课程-教师关系表 前端控制器
- * </p>
- *
  * @author wangzan
+ * @version 1.0
+ * @description 课程师资管理接口
+ * @date 2023/1/28
  */
 @Api(value = "课程师资管理接口", tags = "课程师资管理接口")
 @Slf4j

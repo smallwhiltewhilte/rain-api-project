@@ -15,7 +15,6 @@ import java.util.List;
  * </p>
  *
  * @author wangzan
- * @since 2023-01-17
  */
 public interface TeachPlanService extends IService<TeachPlan> {
     /**

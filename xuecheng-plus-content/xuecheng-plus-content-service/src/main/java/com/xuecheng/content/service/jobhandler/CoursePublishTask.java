@@ -45,11 +45,26 @@ public class CoursePublishTask extends MessageProcessAbstract {
         // 将课程信息进行静态化，上传静态页面到MinIO
         generateCourseHtml(mqMessage, courseId);
         //课程缓存
-//        saveCourseCache(mqMessage,courseId);
+        saveCourseCache(mqMessage,courseId);
         // 创建课程索引
         saveCourseIndex(mqMessage, courseId);
 
         return true;
+    }
+
+    private void saveCourseCache(MqMessage mqMessage, Long courseId) {
+        //消息id
+        Long id = mqMessage.getId();
+        MqMessageService mqMessageService = this.getMqMessageService();
+        // 判断任务是否完成
+        int stageThree = mqMessageService.getStageThree(id);
+        if (stageThree > 0) {
+            log.debug("当前阶段添加缓存，已经完成不再处理，任务信息是:{}", courseId);
+            return;
+        }
+        coursePublishService.saveCourseCache(courseId);
+        // 保存第三阶段状态
+        mqMessageService.completedStageThree(id);
     }
 
     // 添加索引库
@@ -63,10 +78,11 @@ public class CoursePublishTask extends MessageProcessAbstract {
             log.debug("当前阶段创建课程索引，已经完成不再处理，任务信息是:{}", courseId);
             return;
         }
-        coursePublishService.saveCourseIndex(courseId);
-        // 保存第二阶段状态
-        mqMessageService.completedStageTwo(id);
-
+        Boolean b = coursePublishService.saveCourseIndex(courseId);
+        if (b) {
+            // 保存第二阶段状态
+            mqMessageService.completedStageTwo(id);
+        }
     }
 
     // 课程静态化

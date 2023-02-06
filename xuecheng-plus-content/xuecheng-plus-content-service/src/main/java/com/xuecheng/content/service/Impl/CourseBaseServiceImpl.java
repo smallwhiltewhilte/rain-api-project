@@ -28,11 +28,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * <p>
- * 课程基本信息 服务实现类
- * </p>
- *
  * @author wangzan
+ * @version 1.0
+ * @description 课程基本信息 服务实现类
+ * @date 2023/1/17
  */
 @Slf4j
 @Service
