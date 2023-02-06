@@ -16,8 +16,12 @@ import java.util.List;
 @Data
 @ToString
 public class TeachPlanDto extends TeachPlan {
-    // 关联的媒资信息
+    /**
+     * 关联的媒资信息
+     */
     TeachPlanMedia teachPlanMedia;
-    //子目录
+    /**
+     * 子目录
+     */
     List<TeachPlanDto>teachPlanTreeNodes;
 }

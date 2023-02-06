@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: content-service
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      server-addr: centos7:8848
+      config:
+        namespace: dev
+        group: xuecheng-plus-project
+        file-extension: yaml
+        refresh-enabled: true
+        shared-configs:
+          - data-id: logging-${spring.profiles.active}.yaml
+            group: xuecheng-plus-common
+            refresh: true
+#mybatis-plus:
+#  mapper-locations: classpath:/mybatis-plus/*.xml

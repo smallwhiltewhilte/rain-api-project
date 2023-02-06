@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+//import org.springframework.security.access.AccessDeniedException;
 import java.util.List;
 
 /**
@@ -31,17 +32,19 @@ public class GlobalExceptionHandler {
         String errMessage = e.getErrMessage();
         return new RestErrorResponse(errMessage);
     }
-    //捕获不可预知的异常
+    // 捕获没有访问权限异常
     @ResponseBody
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public RestErrorResponse doException(Exception e) {
         log.error("捕获异常信息："+e.getMessage());
         e.printStackTrace();
+        if(e.getMessage().equals("不允许访问")){
+            return new RestErrorResponse("没有操作此功能的权限");
+        }
         return new RestErrorResponse(CommonError.UNKOWN_ERROR.getErrMessage());
     }
 
-    //捕获不可预知的异常
     @ResponseBody
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -55,4 +58,17 @@ public class GlobalExceptionHandler {
         log.error("捕获异常信息："+errors.toString());
         return new RestErrorResponse(errors.toString());
     }
+    //  捕获没有访问权限异常
+//    @ResponseBody
+//    @ExceptionHandler(AccessDeniedException.class)
+//    @ResponseStatus(HttpStatus.FORBIDDEN)
+//    public RestErrorResponse doAccessDeniedException(AccessDeniedException e) {
+//        log.error("无访问权限："+e.getMessage());
+//        e.printStackTrace();
+//        RestErrorResponse errorResponse = new RestErrorResponse("没有操作此功能的权限");
+//        System.out.println("================================================");
+//        System.out.println(errorResponse);
+//        System.out.println("================================================");
+//        return errorResponse;
+//    }
 }

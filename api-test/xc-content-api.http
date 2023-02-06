@@ -1,5 +1,5 @@
 ###
-POST {{content_host}}/content/course/list?pageNo=1&pageSize=10
+POST {{gateway_host}}/content/course/list?pageNo=1&pageSize=10
 Content-Type:application/json
 
 {
@@ -45,5 +45,24 @@ Content-Type: application/json
 <> 2023-01-17T153707.404.json
 
 ### 查询课程计划
-GET {{content_host}}/content/teachplan/117/tree-nodes
+GET {{content_host}}/content/teachplan/18/tree-nodes
+
+### 删除课程计划
+DELETE {{content_host}}/content/teachplan/113
+
+### 查询课程教师
+GET {{content_host}}/content/courseTeacher/list/74
+
+### 添加课程教师
+POST {{content_host}}/content/courseTeacher
 Content-Type: application/json
+
+{
+  "courseId": 75,
+  "teacherName": "王老师",
+  "position": "教师职位",
+  "introduction": "教师简介"
+}
+
+### 查询课程发布信息
+GET {{content_host}}/content/r/coursepublish/18

@@ -50,7 +50,7 @@ public class CourseBaseServiceImpl implements CourseBaseInfoService {
     CourseMarketService courseMarketService;
 
     @Override
-    public PageResult<CourseBase> queryCourseBaseList(PageParams params, QueryCourseParamsDto queryCourseParamsDto) {
+    public PageResult<CourseBase> queryCourseBaseList(Long companyId, PageParams params, QueryCourseParamsDto queryCourseParamsDto) {
 
         LambdaQueryWrapper<CourseBase> queryWrapper = new LambdaQueryWrapper<>();
 
@@ -64,6 +64,7 @@ public class CourseBaseServiceImpl implements CourseBaseInfoService {
         //根据课程发布状态
         queryWrapper.eq(StringUtils.isNotEmpty(queryCourseParamsDto.getPublishStatus()), CourseBase::getStatus, queryCourseParamsDto.getPublishStatus());
 
+        queryWrapper.eq(CourseBase::getCompanyId, companyId);
 
         //分页参数
         Page<CourseBase> page = new Page<>(params.getPageNo(), params.getPageSize());
@@ -77,7 +78,7 @@ public class CourseBaseServiceImpl implements CourseBaseInfoService {
 
 
         //准备返回数据 List<T> items, long counts, long page, long pageSize
-        return new PageResult<>(items, total, params.getPageNo(), params.getPageSize());;
+        return new PageResult<>(items, total, params.getPageNo(), params.getPageSize());
     }
 
     @Transactional
@@ -136,8 +137,6 @@ public class CourseBaseServiceImpl implements CourseBaseInfoService {
 
         // 校验如果课程收费，则必须要有价格
         int i = saveCourseMarket(courseMarket);
-
-
         // 向课程营销表插入一条记录
         if (insert <= 0 || i <= 0) {
             throw new RuntimeException("添加课程失败");
@@ -202,6 +201,11 @@ public class CourseBaseServiceImpl implements CourseBaseInfoService {
         return getCourseBaseInfo(id);
     }
 
+    @Override
+    public void deleteCourseBase(Long courseId) {
+        courseBaseMapper.deleteById(courseId);
+    }
+
     private int saveCourseMarket(CourseMarket courseMarket) {
         String charge = courseMarket.getCharge();
         if (StringUtils.isEmpty(charge)) {
@@ -214,7 +218,7 @@ public class CourseBaseServiceImpl implements CourseBaseInfoService {
         }
         // 保存
         boolean b = courseMarketService.saveOrUpdate(courseMarket);
-        return b?1:0;
+        return b ? 1 : 0;
     }
 
 }

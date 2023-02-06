@@ -8,7 +8,6 @@ import com.xuecheng.content.model.po.CourseBase;
  * 课程基本信息 Mapper 接口
  * </p>
  * @author wangzan
- * @version 1.0
  */
 
 public interface CourseBaseMapper extends BaseMapper<CourseBase> {
