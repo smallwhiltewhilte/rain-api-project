@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rain.rainapiinterface.mapper.PoetryMapper">
+
+    <resultMap id="BaseResultMap" type="com.rain.rainapiinterface.domain.Poetry">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="dynasty" column="dynasty" jdbcType="CHAR"/>
+            <result property="verse" column="verse" jdbcType="CHAR"/>
+            <result property="author" column="author" jdbcType="CHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,dynasty,verse,
+        author
+    </sql>
+</mapper>
