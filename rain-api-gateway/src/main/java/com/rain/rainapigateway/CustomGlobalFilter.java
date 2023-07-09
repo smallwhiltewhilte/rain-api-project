@@ -2,6 +2,12 @@ package com.rain.rainapigateway;
 
 
 import cn.hutool.core.net.URLDecoder;
+import com.alibaba.csp.sentinel.EntryType;
+import com.alibaba.csp.sentinel.SphU;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
+import com.alibaba.csp.sentinel.slots.block.RuleConstant;
+import com.alibaba.csp.sentinel.slots.block.flow.param.ParamFlowRule;
+import com.alibaba.csp.sentinel.slots.block.flow.param.ParamFlowRuleManager;
 import com.rain.rainapiclientsdk.utils.SignUtils;
 import com.rain.rainapicommon.model.entity.InterfaceInfo;
 import com.rain.rainapicommon.model.entity.User;
@@ -30,6 +36,7 @@ import reactor.core.publisher.Mono;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -72,6 +79,20 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
         String timestamp = headers.getFirst("timestamp");
         String sign = headers.getFirst("sign");
         String body = URLDecoder.decode(headers.getFirst("body"), StandardCharsets.UTF_8);
+        String resourceName = "filter";
+
+        ParamFlowRule rule = new ParamFlowRule(resourceName)
+                .setParamIdx(0) // 参数索引，假设 userId 是第一个参数
+                .setCount(5) // 每分钟允许的请求数
+                .setGrade(RuleConstant.FLOW_GRADE_QPS) // 设置限流的维度为 QPS
+                .setDurationInSec(60); // 时间窗口为60秒
+        ParamFlowRuleManager.loadRules(Collections.singletonList(rule));
+        try {
+            SphU.entry(resourceName, EntryType.IN, 1, accessKey);
+        } catch (BlockException e) {
+            // 封号逻辑
+
+        }
         // 去数据库查询是否分配给用户
         User invokeUser = null;
         try {

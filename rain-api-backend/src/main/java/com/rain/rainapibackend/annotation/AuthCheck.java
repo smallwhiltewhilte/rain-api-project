@@ -1,5 +1,7 @@
 package com.rain.rainapibackend.annotation;
 
+import com.rain.rainapibackend.constant.UserConstant;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -17,7 +19,7 @@ public @interface AuthCheck {
      *
      * @return
      */
-    String mustRole() default "";
+    String mustRole() default UserConstant.DEFAULT_ROLE;
 
 }
 

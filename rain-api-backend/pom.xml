@@ -93,5 +93,9 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-parameter-flow-control</artifactId>
+        </dependency>
     </dependencies>
 </project>

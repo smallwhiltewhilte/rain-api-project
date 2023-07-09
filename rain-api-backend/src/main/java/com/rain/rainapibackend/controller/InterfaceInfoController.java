@@ -1,12 +1,8 @@
 package com.rain.rainapibackend.controller;
 
-import com.alibaba.csp.sentinel.EntryType;
-import com.alibaba.csp.sentinel.SphU;
-import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 import com.rain.rainapibackend.annotation.AuthCheck;
 import com.rain.rainapibackend.common.*;
 import com.rain.rainapibackend.constant.CommonConstant;
@@ -261,7 +257,7 @@ public class InterfaceInfoController {
      * @return
      */
     @PostMapping("/invoke")
-    public BaseResponse<Object> invokeInterfaceInfo(@RequestBody InterfaceInfoInvokeRequest interfaceInfoInvokeRequest,HttpServletRequest request) {
+    public BaseResponse<Object> invokeInterfaceInfo(@RequestBody InterfaceInfoInvokeRequest interfaceInfoInvokeRequest, HttpServletRequest request) {
         // 判断是否存在
         if (interfaceInfoInvokeRequest == null || interfaceInfoInvokeRequest.getId() <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
@@ -270,25 +266,16 @@ public class InterfaceInfoController {
         String useRequestParams = interfaceInfoInvokeRequest.getUserRequestParams();
         InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(id);
         ThrowUtils.throwIf(oldInterfaceInfo == null, ErrorCode.NOT_FOUND_ERROR);
-        if (oldInterfaceInfo.getStatus()== InterfaceInfoStatusEnum.OFFLINE.getValue()) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR,"接口已关闭");
+        if (oldInterfaceInfo.getStatus() == InterfaceInfoStatusEnum.OFFLINE.getValue()) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "接口已关闭");
         }
         User loginUser = userService.getLoginUser(request);
-
-        String verse = null;
-        try {
-            Long userId = loginUser.getId();
-            SphU.entry("invokeInterfaceInfo", EntryType.IN, 10, userId);
-            String accessKey = loginUser.getAccessKey();
-            String secretKey = loginUser.getSecretKey();
-            RainApiClient tempClient = new RainApiClient(accessKey,secretKey);
-            Poetry poetry = GSON.fromJson(useRequestParams, Poetry.class);
+        String accessKey = loginUser.getAccessKey();
+        String secretKey = loginUser.getSecretKey();
+        RainApiClient tempClient = new RainApiClient(accessKey, secretKey);
+        Poetry poetry = GSON.fromJson(useRequestParams, Poetry.class);
         /*        com.rain.rainapiclientsdk.model.User user = GSON.fromJson(useRequestParams, com.rain.rainapiclientsdk.model.User.class);
         String nameByPost = tempClient.getVerse(user);*/
-            verse = tempClient.getVerse(poetry);
-        } catch (BlockException e) {
-            throw new BusinessException(ErrorCode.OPERATION_ERROR,"操作频繁");
-        }
-        return ResultUtils.success(verse);
+        return ResultUtils.success(tempClient.getVerse(poetry));
     }
 }
