@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rain.rainapiinterface.mapper.PoetryMapper">
 
-    <resultMap id="BaseResultMap" type="com.rain.rainapiinterface.domain.Poetry">
+    <resultMap id="BaseResultMap" type="com.rain.rainapiinterface.model.enity.Poetry">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="dynasty" column="dynasty" jdbcType="CHAR"/>
             <result property="verse" column="verse" jdbcType="CHAR"/>

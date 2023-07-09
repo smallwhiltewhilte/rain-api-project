@@ -6,14 +6,23 @@ import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
+import com.google.gson.Gson;
+import com.rain.rainapiclientsdk.model.Article;
 import com.rain.rainapiclientsdk.model.Poetry;
 import com.rain.rainapiclientsdk.model.User;
+import org.springframework.web.socket.client.WebSocketClient;
 
+import javax.websocket.*;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
+import java.util.function.Consumer;
 
 import static com.rain.rainapiclientsdk.utils.SignUtils.getSign;
 
@@ -23,10 +32,14 @@ import static com.rain.rainapiclientsdk.utils.SignUtils.getSign;
  *
  * @author 王赞
  */
+@ClientEndpoint
 public class RainApiClient {
     private String accessKey;
     private String secretKey;
     private static final String GATEWAY_HOST="http://127.0.0.1:8090";
+    private static final String WEBSOCKET_GATEWAY_HOST="ws://127.0.0.1:8090";
+    private final Gson gson = new Gson();
+    private Consumer<String> consumer;
     public RainApiClient(String accessKey, String secretKey) {
         this.accessKey = accessKey;
         this.secretKey = secretKey;
@@ -73,5 +86,24 @@ public class RainApiClient {
                 .body(json)
                 .execute();
         return httpResponse.body();
+    }
+    public void getArticle(Article article, Consumer<String> consumer){
+        // 建立连接后
+        WebSocketContainer container = ContainerProvider.getWebSocketContainer();
+        String sid = UUID.randomUUID().toString();
+        article.setArticleId(sid);
+        try {
+            Session session = container.connectToServer(WebSocketClient.class, new URI(WEBSOCKET_GATEWAY_HOST+"/article"+sid));
+            session.getBasicRemote().sendText(gson.toJson(article));
+            this.consumer = consumer;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @OnMessage
+    public void onMessage(String message) {
+        if (consumer != null) {
+            consumer.accept(message);
+        }
     }
 }

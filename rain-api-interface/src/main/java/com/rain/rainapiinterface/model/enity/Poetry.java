@@ -1,4 +1,4 @@
-package com.rain.rainapiinterface.domain;
+package com.rain.rainapiinterface.model.enity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;

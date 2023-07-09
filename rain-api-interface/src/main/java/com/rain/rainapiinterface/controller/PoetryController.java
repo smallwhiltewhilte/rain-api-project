@@ -1,11 +1,9 @@
 package com.rain.rainapiinterface.controller;
 
-import com.rain.rainapiinterface.domain.Poetry;
 import com.rain.rainapiinterface.service.PoetryService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * 名称API

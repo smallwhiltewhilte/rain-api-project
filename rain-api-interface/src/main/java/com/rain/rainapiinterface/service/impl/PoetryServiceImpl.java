@@ -3,7 +3,7 @@ package com.rain.rainapiinterface.service.impl;
 import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.rain.rainapiinterface.domain.Poetry;
+import com.rain.rainapiinterface.model.enity.Poetry;
 import com.rain.rainapiinterface.service.PoetryService;
 import com.rain.rainapiinterface.mapper.PoetryMapper;
 import org.springframework.stereotype.Service;

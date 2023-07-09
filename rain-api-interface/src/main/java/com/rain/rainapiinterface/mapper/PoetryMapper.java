@@ -1,6 +1,6 @@
 package com.rain.rainapiinterface.mapper;
 
-import com.rain.rainapiinterface.domain.Poetry;
+import com.rain.rainapiinterface.model.enity.Poetry;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
